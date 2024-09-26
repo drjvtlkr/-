@@ -4,11 +4,12 @@ import { Label } from "@/components/ui/label";
 import { getSession } from "@/lib/getSession";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { registerUser } from "../../../actions/user";
 
 const Register = async () => {
   const session = await getSession();
-  // const user = session?.user;
-  // if (user) redirect("/");
+  const user = session?.user;
+  if (user) redirect("/");
 
   return (
     <div className="mt-10 max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white border border-[#121212]  dark:bg-black">
@@ -19,7 +20,7 @@ const Register = async () => {
         Please provide all the necessary information
       </p>
 
-      <form className="my-8">
+      <form className="my-8" action={registerUser}>
         <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
           <div className="flex flex-col">
             <Label htmlFor="firstname" className="mb-2">
@@ -27,7 +28,7 @@ const Register = async () => {
             </Label>
             <Input
               id="firstname"
-              placeholder="Tyler"
+              placeholder="Jon"
               type="text"
               name="firstname"
             />
@@ -38,7 +39,7 @@ const Register = async () => {
             </Label>
             <Input
               id="lastname"
-              placeholder="Durden"
+              placeholder="Doe"
               type="text"
               name="lastname"
             />
@@ -48,7 +49,7 @@ const Register = async () => {
         <Label htmlFor="email">Email Address</Label>
         <Input
           id="email"
-          placeholder="projectmayhem@fc.com"
+          placeholder="your@email.com"
           type="email"
           name="email"
         />
@@ -66,8 +67,8 @@ const Register = async () => {
           Sign up &rarr;
         </button>
 
-        <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
-          Already have an account? <Link href="/login">Login</Link>
+        <p className="flex text-center text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
+          Already have an account? <Link href="/login"><span className="underline">Login</span></Link>
         </p>
       </form>
     </div>
